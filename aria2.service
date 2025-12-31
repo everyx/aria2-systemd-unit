@@ -1,0 +1,16 @@
+[Unit]
+Description=Aria2 Service
+After=network.target
+
+[Service]
+ExecStart=/usr/bin/aria2c \
+    --enable-rpc \
+    --input-file=%S/aria2/session.lock \
+    --save-session=%S/aria2/session.lock \
+    --conf-path=%E/aria2/aria2.conf \
+    --daemon=false
+Restart=on-failure
+RestartSec=5s
+
+[Install]
+WantedBy=default.target
